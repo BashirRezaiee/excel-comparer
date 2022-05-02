@@ -1,7 +1,6 @@
 # from openpyxl.worksheet import WorkSheet;
 import PySimpleGUI as sg
 from openpyxl import load_workbook
-from openpyxl.cell import Cell
 
 def dp(window, event, values):
     print('Inside dp')
@@ -11,6 +10,10 @@ def dp(window, event, values):
     spirit = values['-dpSpirit-']
     sheet = 'Time Periods'
 
+    # dp_file_path = '/home/bashir/projects/python/excel-comparer/venv/dp.xlsx'
+    # country_name = 'France'
+    # spirit = 'Y1/W5'
+
     # load excel file
     wb = load_workbook(dp_file_path)
 
@@ -18,23 +21,22 @@ def dp(window, event, values):
     ws = wb[sheet]
 
     # find the cell containing the country name
-    header_row = ws.iter_rows(min_row=2, min_col=7, max_row=2)
+    header_row = ws.iter_cols(min_row=2, min_col=7, max_row=2)
 
-    target_col = None
-
-    for a, b in header_row:
-        if country_name in str(a.value):
-           target_col = a
+    for a in header_row:
+        if country_name in str(a[0].value):
+           target_col = a[0]
+           break
 
     if target_col:
-        col = ws[target_col.column]
+        rows = ws.iter_rows(min_col=target_col.column, max_col=target_col.column, min_row=7)
 
-        for c in col:
-            if c.value == spirit:
-                sg.popup(f'The {spirit} has been found on {target_col.column_letter}{c.row}')
-                print('Found: ')    
-                print(c.value)    
-                break
+        for r in rows:
+            if spirit == r[0].value:
+                sg.popup(f'The {spirit} has been found on {target_col.column_letter}{r[0].row}.')
+                return
+        
+        sg.popup(f'Could not find {spirit} for country {country_name} in this file.')
 
 
 def labeled(window, event, values):
