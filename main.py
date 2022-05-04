@@ -12,7 +12,7 @@ dp_layout = [
     [sg.Input('Canada', key='-dpCountryName-')],
     [sg.Text('Spirit: ')],
     [sg.Input('Y1/W1', key='-dpSpirit-')],
-    [sg.Button('Search')]   
+    [sg.Button('Search')]
 ]
 
 labeled_layout = [
@@ -29,11 +29,11 @@ labeled_layout = [
 
 check_brand_layout = [
     [sg.Text('Brand list file: ')],
-    [sg.Input(), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
+    [sg.Input(key='-brandListFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Text('Baner file: ')],
-    [sg.Input(), sg.FileBrowse(file_types=(("Excel Files", "*.xls *.xlsx"),))],
+    [sg.Input(key='-brandBanerFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Text('Country Code: ')],
-    [sg.Input()],
+    [sg.Input('AR', key='-countryCode-')],
     [sg.Button('Check')]   
 ]
 
@@ -61,6 +61,5 @@ while True:  # Event Loop
             comparator.check_brand(window, event, values)
     except Exception as ex:
         sg.PopupError('Something went wrong', 'close this window and copy command line from text printed out in main window','Here is the output from the run', ex)
-
 
 window.close()
