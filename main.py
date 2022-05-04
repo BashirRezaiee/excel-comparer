@@ -7,7 +7,7 @@ font = "Arial, 12"
 
 dp_layout = [
     [sg.Text('DP File: ')],
-    [sg.Input(key='-dpDpFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xls *.xlsx"),))],
+    [sg.Input(key='-dpDpFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Text('Country Name: ')],
     [sg.Input('Canada', key='-dpCountryName-')],
     [sg.Text('Spirit: ')],
@@ -17,19 +17,19 @@ dp_layout = [
 
 labeled_layout = [
     [sg.Text('DP File: ')],
-    [sg.Input(), sg.FileBrowse(file_types=(("Excel Files", "*.xls *.xlsx"),))],
+    [sg.Input(key='-labeledDpFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Text('Country Code: ')],
-    [sg.Input(key='-labeledCountryCode-')],
+    [sg.Input('AR', key='-labeledCountryCode-')],
     [sg.Text('Folder to search in: ')],
-    [sg.Input('-labeledSearchFolder-'), sg.FolderBrowse()],
-    [sg.Text('Baner Type: ')],
-    [sg.Checkbox('BrandCo'), sg.Checkbox("KPI")],
+    [sg.Input(key='-labeledSearchFolder-'), sg.FolderBrowse()],
+    [sg.Text('Lookup upto row: ')],
+    [sg.Input('20', key='-labeledMaxRow-')],
     [sg.Button('Go')]   
 ]
 
 check_brand_layout = [
     [sg.Text('Brand list file: ')],
-    [sg.Input(), sg.FileBrowse(file_types=(("Excel Files", "*.xls *.xlsx"),))],
+    [sg.Input(), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Text('Baner file: ')],
     [sg.Input(), sg.FileBrowse(file_types=(("Excel Files", "*.xls *.xlsx"),))],
     [sg.Text('Country Code: ')],
@@ -61,8 +61,6 @@ while True:  # Event Loop
             comparator.check_brand(window, event, values)
     except Exception as ex:
         sg.PopupError('Something went wrong', 'close this window and copy command line from text printed out in main window','Here is the output from the run', ex)
-
-
 
 
 window.close()

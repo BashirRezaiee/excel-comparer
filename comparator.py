@@ -1,6 +1,7 @@
-# from openpyxl.worksheet import WorkSheet;
+   # from openpyxl.worksheet import WorkSheet;
 import PySimpleGUI as sg
 from openpyxl import load_workbook
+from os import listdir
 
 def dp(window, event, values):
     print('Inside dp')
@@ -42,6 +43,38 @@ def dp(window, event, values):
 def labeled(window, event, values):
     print('Inside labeled')
 
+    dp_file_path = values['-labeledDpFile-']
+    country_code = values['-labeledCountryCode-']
+    max_row = int(values['-labeledMaxRow-'])
+    folder_path = values['-labeledSearchFolder-']
+    sheet = 'Time Periods'
+
+    # load excel file
+    wb = load_workbook(dp_file_path)
+
+    # get the sheet
+    ws = wb[sheet]
+
+    # find the cell containing the country name
+    header_row = ws.iter_cols(min_row=6, max_row=max_row, min_col=2, max_col=3)
+
+    # get filenames to search in the folder
+    filenames = []
+    for i, e in enumerate(header_row):
+        filenames = filenames + list(e)
+    filtered = [i.value.replace('MarketCountryCode', country_code) for i in filenames if i.value != None]
+
+    folder_files = listdir(folder_path)
+    folder_files_without_extension = [x.split('.')[0] for x in folder_files]
+
+    diff = set(filtered) - set(folder_files_without_extension) 
+
+    result = f'The Following {len(diff)} files is not present in the specified folder:\n\n'
+
+    for d in diff:
+        result += f'- {d}\n'
+
+    sg.popup(result)
 
 def check_brand(window, event, values):
     print('Inside check_brand')
