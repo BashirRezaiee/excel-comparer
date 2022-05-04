@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from openpyxl import load_workbook
 from os import listdir
 
-def dp(window, event, values):
+def dp(values):
     print('Inside dp')
 
     dp_file_path = values['-dpDpFile-']
@@ -35,7 +35,7 @@ def dp(window, event, values):
         sg.popup(f'Could not find {spirit} for country {country_name} in this file.')
 
 
-def labeled(window, event, values):
+def labeled(values):
     print('Inside labeled')
 
     dp_file_path = values['-labeledDpFile-']
@@ -71,7 +71,7 @@ def labeled(window, event, values):
 
     sg.popup(result)
 
-def check_brand(window, event, values):
+def check_brand(values):
     print('Inside check_brand')
 
     brand_list_path = values['-brandListFile-']

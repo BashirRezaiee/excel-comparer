@@ -54,11 +54,11 @@ while True:  # Event Loop
         if event == sg.WIN_CLOSED or event == 'Exit':
             break
         elif event == "Search":
-            comparator.dp(window, event, values)
+            comparator.dp(values)
         elif event == "Go":
-            comparator.labeled(window, event, values)
+            comparator.labeled(values)
         elif event == "Check":
-            comparator.check_brand(window, event, values)
+            comparator.check_brand(values)
     except Exception as ex:
         sg.PopupError('Something went wrong', 'close this window and copy command line from text printed out in main window','Here is the output from the run', ex)
 
