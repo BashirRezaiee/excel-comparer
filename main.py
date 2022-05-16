@@ -30,10 +30,20 @@ labeled_layout = [
 check_brand_layout = [
     [sg.Text('Brand list file: ')],
     [sg.Input(key='-brandListFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
-    [sg.Text('Baner file: ')],
-    [sg.Input(key='-brandBanerFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Text('Country Code: ')],
     [sg.Input('AR', key='-countryCode-')],
+    [sg.Text('Banner Type: ')],
+    [sg.Radio('BrandCo', 'BannerType', default=True, key='-BrandCo-'), 
+     sg.Radio('KPI', 'BannerType', key='-KPI-'), 
+     sg.Radio('KPI Yearly', 'BannerType', key='KPIYearly')],
+    [sg.Text('Year: ')],
+    [sg.Input('FY18', key='-brandYear-')],
+    [sg.Text('Quarter: ')],
+    [sg.Input('2', key='-brandQuarter-')],
+    [sg.Text('Folder to search in: ')],
+    [sg.Input(key='-brandSearchFolder-'), sg.FolderBrowse()],
+    # [sg.Text('Baner file: ')],
+    # [sg.Input(key='-brandBanerFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Button('Check')]   
 ]
 
