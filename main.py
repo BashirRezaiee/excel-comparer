@@ -6,17 +6,21 @@ app_name = "Excel Comparer"
 font = "Arial, 12"
 
 dp_layout = [
+    [sg.Text(f'\n In this tab we check if the specified wave for a given country is present in the \n Prime DP Global Spec file. \n \n The following checklist items will be checked:\n - checklist 1 \n - checklist 2')],
+    [sg.HorizontalSeparator()],
     [sg.Text('DP File: ')],
     [sg.Input(key='-dpDpFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Text('Country Name: ')],
     [sg.Input('Canada', key='-dpCountryName-')],
-    [sg.Text('Spirit: ')],
+    [sg.Text('Wave: ')],
     [sg.Input('Y1/W1', key='-dpSpirit-')],
     [sg.Button('Search')]
 ]
 
 labeled_layout = [
-    [sg.Text('DP File: ')],
+    [sg.Text(f'\n In this tab we check if all benner files (KPI and BrandCo) from Prime DP Global Spec file \n is present in the specified folder for a specific country. \n \n The following checklist items will be checked:\n - checklist 1 \n - checklist 2')],
+    [sg.HorizontalSeparator()],
+    [sg.Text('Prime DP Global Spec File: ')],
     [sg.Input(key='-labeledDpFile-'), sg.FileBrowse(file_types=(("Excel Files", "*.xlsx"),))],
     [sg.Text('Country Code: ')],
     [sg.Input('AR', key='-labeledCountryCode-')],
@@ -49,8 +53,8 @@ check_brand_layout = [
 
 layout = [[
     sg.TabGroup([
-        [sg.Tab('Is defined in DP', dp_layout),
-         sg.Tab('Is labeled correctly', labeled_layout),
+        [sg.Tab('Wave Defined in DP', dp_layout),
+         sg.Tab('Brand Files Lebeled Correctly', labeled_layout),
          sg.Tab('Check brand names', check_brand_layout)]
     ])
 ]]

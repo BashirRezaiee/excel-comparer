@@ -73,6 +73,8 @@ def labeled(values):
 
     sg.popup(result)
 
+# Tab 3 -------------------------------------------------------------------------
+
 def isZero(value):
     return value == '0' or value == 0
 
@@ -120,9 +122,6 @@ def check_brand(values):
     elif values['-KPIYearly-']:
         banner_file_name += '_KPI_' + values['-brandYear-'] + '_Yearly'
         brand_type = 'KPIYEARLY'
-
-    print('brand type is : ')
-    print(brand_type)
 
     # add extension to filename
     banner_file_name += '.xlsx'
